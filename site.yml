@@ -1,19 +1,16 @@
 ---
 
 - name: Install Kibana
-  become: true
   hosts: kibana
   roles: 
     - kibana
  
 - name: Install Elasticsearch
-  become: true
   hosts: elastic    
   roles: 
     - elastic
 
 - name: Install Filebeat
-  become: true
   hosts: filebeat
   roles: 
     - filebeat
