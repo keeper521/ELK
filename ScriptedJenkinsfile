@@ -2,15 +2,15 @@ node("linux"){
     stage("Git checkout"){
         git branch: 'main', credentialsId: '699ff1ff-7cdf-4c62-b241-4875d7c6982a', url: 'https://github.com/keeper521/ELK.git'
     }
-    stage("Sample define secret_check"){
-        secret_check=true
+    stage("prod run"){
+        prod_run=false
     }
     stage("Run playbook"){
-        if (secret_check){
+        if (prod_run){
             sh 'ansible-playbook site.yml -i inventory/hosts.yml'
         }
         else{
-            echo 'need more action'
+            sh 'ansible-playbook site.yml -i inventory/hosts.yml --check --diff'
         }
         
     }
