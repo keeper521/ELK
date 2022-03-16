@@ -1,0 +1,28 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+  - name: Example assertion
+    assert:
+      that: true
+  - name: run kibana centos 7
+    shell: /etc/rc.d/init.d/kibana start
+    when: ansible_facts.pkg_mgr == 'yum'
+
+  - name: run kibana ubuntu
+    shell: apt update && apt install curl -y && /etc/init.d/kibana start
+    when: ansible_facts.pkg_mgr == 'apt'
+
+  - name: run kibana centos 8
+    shell: /etc/rc.d/init.d/kibana start
+    when: ansible_facts.pkg_mgr == 'dnf'
+
+  - name: Kibana test web
+    retries: 30
+    shell: curl http://127.0.0.1:5601
+    register: web_kibana
+    until: web_kibana is succeeded 
+ 
