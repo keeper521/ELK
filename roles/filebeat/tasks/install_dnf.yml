@@ -1,0 +1,11 @@
+---
+- name: Repo yum
+  shell: cd /etc/yum.repos.d/ && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+- name: Install Filebeat
+  become: true
+  yum:
+    name: "/tmp/filebeat-{{ filebeat_version }}-x86_64.rpm"
+    disable_gpg_check: true
+    state: present
+  notify: restart filebeat
