@@ -1,0 +1,22 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Example assertion
+    assert:
+      that: true
+  - name: Check file filebeat 
+    stat:
+      path: /etc/rc.d/init.d/filebeat
+    register: filebeat_file
+    until: filebeat_file is succeeded
+  - name: Check log
+    stat:
+      path: /var/log/filebeat/filebeat
+    register: filebeat_log
+    until: filebeat_log is succeeded
+ 
+
