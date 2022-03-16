@@ -1,4 +1,4 @@
 ---
 kibana_version: "7.14.0"
 kibana_install_type: remote
-elastic_addr: 10.0.0.12
+elastic_addr: 10.129.0.16
