@@ -1,5 +1,5 @@
 ---
-  - src: git@github.com:netology-code/mnt-homeworks-ansible.git
+  - src: git@github.com:keeper521/elastic.git
     scm: git
     version: "2.1.4"
     name: elastic
